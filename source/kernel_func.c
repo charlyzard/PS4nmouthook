@@ -168,7 +168,7 @@ void install_nmount_hooks(void) {
 	data->sys_nmount_orig = sysents[378].sy_call;
 
 	void* hook_ptr = (void*)rwx_kalloc(0x10000);
-	k_memcpy(hook_ptr, sys_nmount_hook, 0x1000);
+	k_memcpy(hook_ptr, sys_nmount_hook, sizeof(sys_nmount_hook));
 	
 	uint64_t cr0 = readCr0();
 	writeCr0(cr0 & ~X86_CR0_WP);
